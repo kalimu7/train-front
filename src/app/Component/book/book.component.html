@@ -1,0 +1,135 @@
+<main>
+  <section class="intro">
+    <div class="caption "style="display: flex;justify-content:flex-end; ">
+      <a class="btn" *ngIf="isButtonVisible" style="background-color: rgb(63, 41, 139); padding: 10px;color: #FFF;margin-right:10px !important ;border-radius: 10px; padding: 10px;cursor: pointer;" (click)="onLogout()">Logout</a>
+    </div>
+
+    <div class="inquiry">
+      <div class="title">
+        Find Trains
+      </div>
+      <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+        <div>
+          <div>
+            <label for="from" style="display: block;">From:</label>
+            <select id="from" style="display: block;" formControlName="departurCity">
+
+              <option value="agadir" selected>agadir</option>
+              <option value="tanger">tanger</option>
+              <option value="fes">fes</option>
+              <option value="casablanca">casablanca</option>
+              <option value="meknes">meknes</option>
+              <option value="safi">safi</option>
+
+            </select>
+          </div>
+          <div>
+            <label for="to">To:</label>
+            <select id="to" formControlName="arrivatCity">
+              <option value="agadir" selected>agadir</option>
+              <option value="tanger">tanger</option>
+              <option value="fes">fes</option>
+              <option value="casablanca">casablanca</option>
+              <option value="meknes">meknes</option>
+              <option value="safi">safi</option>
+            </select>
+          </div>
+          <div>
+            <label for="day">Date:</label>
+            <input type="date" id="day" formControlName="departureday">
+          </div>
+        </div>
+        <div>
+          <div>
+            <label for="comfort">My comfort:</label>
+            <select id="comfort">
+              <option value="eco">Economy</option>
+              <option value="bus">Business</option>
+            </select>
+          </div>
+          <div>
+            <label for="travelers">Travelers :</label>
+            <input type="number" id="travelers" placeholder="Travelers number">
+          </div>
+          <input type="submit" value="Search" id="btns">
+        </div>
+      </form>
+
+    </div>
+
+  </section>
+</main>
+
+<div class="ticketContainer">
+
+
+  <div class="boarding-pass" style="width: 500px;" [ngClass]="{'display-block': showhide, 'display-none': !showhide}" *ngFor="let ticket of tickets">
+    <header style="display: flex;justify-content: space-between;">
+      <div class="flight">
+        <small>Price</small>
+        <strong style="font-size: 20px;">{{ticket.price}}</strong>
+      </div>
+      <div class="flight">
+        <small>ONCF</small>
+        <strong>ATLAS 1012</strong>
+      </div>
+    </header>
+    <section class="cities">
+      <div class="city">
+        <small>From</small>
+  
+        <strong>{{ticket.departurCity}}</strong>
+      </div>
+      <div class="city">
+        <small>TO</small>
+  
+        <strong>{{ticket.arrivatCity}}</strong>
+      </div>
+      <svg class="airplane">
+        <use xlink:href="#airplane"></use>
+      </svg>
+    </section>
+    <section class="infos">
+      <div class="places">
+        <div class="box">
+          <small>Train</small>
+          <strong><em>ONCF</em></strong>
+        </div>
+        <div class="box">
+          <small>Gate</small>
+          <strong><em>C3</em></strong>
+        </div>
+        <div style="width: 100%;padding: 20px;">
+          <button style="background-color: #2c394f;color: #FFF;border: none;border-radius: 20px;padding: 20px;cursor: pointer;" (click)="bookticket(ticket.id)">Book Now</button>
+        </div>
+      </div>
+      <div class="times">
+        <div class="box">
+          <small>Departure Day</small>
+          <strong>{{ticket.departureday}}</strong>
+        </div>
+        <div class="box">
+          <small>Time</small>
+          <strong>{{ticket.departureTime}}</strong>
+        </div>
+        <div class="box">
+          <small>Arrival Day</small>
+          <strong>{{ticket.arrivatday}}</strong>
+        </div>
+        <div class="box">
+          <small>Time</small>
+          <strong>{{ticket.arrivatTime}}</strong>
+        </div>
+      </div>
+    </section>
+    
+  </div>
+  
+
+</div>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
